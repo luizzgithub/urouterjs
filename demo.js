@@ -2,10 +2,14 @@
  µ().conf(document.getElementById('container-tpl'));
     
  µ('index', function(p){
+	 
 	 this.send();
  });
  
  µ('contato', function(p){
+	 
+	 this.teste = 'Contato Teste';
+	 
 	 this.send();
  });
  
