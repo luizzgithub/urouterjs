@@ -1,15 +1,14 @@
 
 var µ = (function (w) {
 
-    var self = {}, route = [], container, navigated, scripTmpl = [], hashActive = '', l = w.location, timehash, iscache = false;
+    var self = {}, route = [], container, navigated, scripTmpl = [], hashActive = '', l = w.location, timehash;
 
-    self.conf = function (c, n, cache) {
+    self.conf = function (c, n) {
         container = c;
         navigated = n;
-        iscache = cache || false;
     };
 
-    //Utilitario do contexto e renderizar template
+    //util context / render template
     self.send = function (callback) {
         var ctex = this;
 
@@ -38,11 +37,12 @@ var µ = (function (w) {
     };
 
     //Ajax
-    self.ajax = function (action, params, callback) {
+    self.ajax = function (action, params, callback, iscache) {
 
         var ctex = this;
         params = params || {};
-        
+        iscache = iscache || false;
+		
         var optionAjax = {
                             'type': "GET",
                             'url': action,
@@ -69,7 +69,7 @@ var µ = (function (w) {
 
     };
 
-    //Renderizar template
+    //render template
     self.tmpl = function (name, data, callback) {
 
         var body = container;
@@ -113,35 +113,34 @@ var µ = (function (w) {
         return false;
     };
 
-    //Adicioanar rota
+    //add route
     self.add = function (hash, call) {
 
-        if (typeof hash === 'undefined' && typeof call === 'undefined')
+        if (typeof hash === 'undefined' && typeof call === 'undefined'){
             return self;
-
-        var typeo = typeof (hash);
-
-        if (typeo === 'object') {
+		}
+		
+        if (typeof (hash) === 'object') {
             for (var i in hash) {
                 self.add(i, hash[i]);
             }
         }
 
-        if (typeof call !== 'function')
+        if (typeof call !== 'function'){
             call = function () {
                 self.send.call({'route': hash});
             };
-
+		}
 
         route.push({'h': hash, 'regx': new RegExp(hash), 'callback': call});
 
         return self.add;
     };
 
-    //Inicializar
+    //init
     self.run = function (callback) {
 
-        //Carregar script/template
+        //load script/template
         try {
             var scriptTemp = document.getElementsByTagName('script');
             for (var s in scriptTemp) {
@@ -150,12 +149,12 @@ var µ = (function (w) {
                 }
             }
         } catch (err) {
-            console.log('Erro Load Script');
+            console.log('erro load Script');
             callback(false);
             return false;
         }
 
-        //SET CHANGE EVENT
+        //set change event
         try {
             if (typeof jQuery !== "undefined")
                 $(w).hashchange(hashChange);
@@ -174,7 +173,7 @@ var µ = (function (w) {
             if (location.hash !== '')
                 hashChange();
             else
-                location.hash = 'index';
+                location.hash = 'index'; //home set index
         } catch (err) {
             timehash = setInterval(hashChange, 800);
             callback(false);
@@ -193,7 +192,7 @@ var µ = (function (w) {
         var error = true;
         var u = l.hash.split("?")[0].split("#")[1] === "" ? "index" : l.hash.split("?")[0].split("#")[1];
 
-        var uhashCode = u !== undefined ? u.hashCode() : '9999999';
+        var uhashCode = (typeof u !== 'undefined') ? l.hash.toString().hashCode() : '9999999';
 
         for (var i in route) {
 
@@ -205,9 +204,7 @@ var µ = (function (w) {
 
                 if (u.toString().match(route[i].regx).length) {
                     var padd = u.toString().match(route[i].regx);
-                    //padd.shift();
                     padd.shift('index: 0');
-
                     params = params.concat(padd);
                 }
 
@@ -225,9 +222,9 @@ var µ = (function (w) {
                     //console.time(_self.route);
                     route[i].callback.call(_self, params);
                 } catch (e) {
-                    console.log('Erro', _self, e);
-                }
-                error = false;
+                    console.log('erro', _self.route, e);
+                } error = false;
+				
                 break;
             }
         }
