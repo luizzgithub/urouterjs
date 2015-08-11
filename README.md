@@ -3,6 +3,19 @@ Mini router js
 
 Necessita do jQuery, RJSON(se usar ajax), UnderscoreJS(se usar template)
 
+Metodos:
+- conf
+- ajax(jQuery)
+- db(Localstorage)
+- tmpl(UnderscoreJS) 
+- redirect 
+- add(Routa) ou µ('index');
+- send
+- run 
+
+Inclui tambem o Cache AJAX: github.com/paulirish/jquery-ajax-localstorage-cache
+
+**Exemplo
 *INDEX
 
 HTML: Declarando o conteudo da /#index ' HOME '
