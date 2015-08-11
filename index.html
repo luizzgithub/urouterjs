@@ -4,13 +4,20 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
+		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 		<meta http-equiv="Content-Security-Policy" content="default-src *; connect-src *;style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
 	</head>
     <body>
-		<a href="#index"> HOME </a>
-		<a href="#contato"> CONTATO </a>
-		<div id="container-tpl">
+		<div class="pure-menu pure-menu-horizontal">
+			<a href="#" class="pure-menu-heading pure-menu-link">µRouter.js</a>
+			<ul class="pure-menu-list">
+				<li class="pure-menu-item"><a class="pure-menu-link" href="#index"> HOME </a></li>
+				<li class="pure-menu-item"><a class="pure-menu-link" href="#contato"> CONTATO </a></li>
+			</ul>
+		</div>
+		
+		<div class="pure-g" id="container-tpl">
             Carregando ...
         </div>
 		
@@ -25,8 +32,9 @@
 
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="underscore.js"></script>
-        <script type="text/javascript" src="mu.js"></script>
-        <script type="text/javascript" src="rjson.js"></script>
+		<script type="text/javascript" src="rjson.js"></script>
+		
+        <script type="text/javascript" src="µrouter.js"></script>
         <script type="text/javascript" src="demo.js"></script>
     </body>
 </html>

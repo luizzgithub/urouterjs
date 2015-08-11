@@ -21,10 +21,10 @@ var µ = (function (w) {
 
     self.db = function (name, val) {
 
-        if (val === undefined) {
-            return JSON.parse(window.localStorage.getItem(name));
+        if (typeof val === 'undefined') {
+            return JSON.parse(localStorage.getItem(name));
         }
-        window.localStorage.setItem(name, JSON.stringify(val));
+        localStorage.setItem(name, JSON.stringify(val));
     };
 
     self.redirect = function (hash) {
@@ -49,7 +49,7 @@ var µ = (function (w) {
                             'data': params,
                             'dataType': "json",
                             'success': function (rdata) {
-                                var data = RJSON ? RJSON.unpack(rdata) : rdata;
+                                var data = (typeof(RJSON) !== 'undefined') ? RJSON.unpack(rdata) : rdata;
 
                                 if (!data || data.hasOwnProperty('list') === false) {
                                     data = {'list': []};
@@ -87,8 +87,8 @@ var µ = (function (w) {
             } else {
 
                 var text_html = scripTmpl[name];
-
-                tmploade = _.template(text_html, data);
+			
+				tmploade = ("template" in _) ? _.template(text_html, data):text_html;
             }
 
             body.innerHTML = tmploade;
@@ -156,8 +156,8 @@ var µ = (function (w) {
 
         //set change event
         try {
-            if (typeof jQuery !== "undefined")
-                $(w).hashchange(hashChange);
+            if (typeof jQuery !== "undefined" && "hashchange" in jQuery.fn)
+                jQuery(w).hashchange(hashChange);
             else if (w.onhashchange)
                 w.onhashchange = hashChange;
             else if (w.addEventListener) {
@@ -183,10 +183,7 @@ var µ = (function (w) {
         callback(true);
     };
 
-    function hashChange(e) {
-
-        if (typeof e !== 'undefined' && e.preventDefault)
-            e.preventDefault(), e.stopPropagation();
+    function hashChange() {
 
         var params = [p()];
         var error = true;
