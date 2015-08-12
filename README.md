@@ -10,19 +10,19 @@ Metodos:
 - tmpl(UnderscoreJS) 
 - redirect 
 - add(Routa) ou µ('index');
-- send
-- run 
+- send (Mostrar o resoltado)
+- run (Inicializa as config e rotas)
 
 Inclui tambem o Cache AJAX: github.com/paulirish/jquery-ajax-localstorage-cache
 
 **Exemplo
 *INDEX
 
-HTML: Declarando o conteudo da /#index ' HOME '
+HTML: Declarando o conteudo da http://app/#index => ' HOME '
 ```
   <script type="text/template" id="index"> HOME </script>
 ```
-JS: criando a rota e mostrando 'this.send();'
+JS: criando a rota e mostrando com 'this.send();'
 ```
  µ('index', function(p){
 	 this.send();
@@ -32,16 +32,16 @@ JS: criando a rota e mostrando 'this.send();'
 
 *Contato
 
-HTML: Declarando o conteudo do /#contato ' CONTATO <%= teste %> ' usando template ' <%= teste %> '
+HTML: Declarando o conteudo do http://app/#contato => ' CONTATO <%= teste %> ' usando template ' <%= teste %> '
 ```
   <script type="text/template" id="contato">
 			CONTATO <%= teste %>
-	</script>
+  </script>
 ```
 JS: criando a rota e passando o valor do template ' this.teste = "Contato Teste"; ' 
 ```
  µ('contato', function(p){
-	 this.teste = 'Contato Teste';
+	 this.teste = 'Contato Teste'; // Vai para <%= teste %>
 	 this.send();
  });
 ```
