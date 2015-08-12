@@ -10,7 +10,7 @@ Metodos:
 - tmpl(UnderscoreJS) 
 - redirect 
 - add(Routa) ou µ('index');
-- send (Mostrar o resoltado)
+- send (Mostrar o resultado)
 - run (Inicializa as config e rotas)
 
 Inclui tambem o Cache AJAX: github.com/paulirish/jquery-ajax-localstorage-cache
