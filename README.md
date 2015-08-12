@@ -24,6 +24,7 @@ HTML: Declarando o conteudo da http://app/#index => ' HOME '
 ```
 JS: criando a rota e mostrando com 'this.send();'
 ```
+ // Vai procurar <script id="index" />
  µ('index', function(p){
 	 this.send();
  });
@@ -40,6 +41,7 @@ HTML: Declarando o conteudo do http://app/#contato => ' CONTATO <%= teste %> ' u
 ```
 JS: criando a rota e passando o valor do template ' this.teste = "Contato Teste"; ' 
 ```
+ // Vai procurar <script id="contato" />
  µ('contato', function(p){
 	 this.teste = 'Contato Teste'; // Vai para <%= teste %>
 	 this.send();
