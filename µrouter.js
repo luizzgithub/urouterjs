@@ -93,17 +93,17 @@ var µ = (function (w) {
 
             body.innerHTML = tmploade;
 
-            window.scrollTo(0, 0);
+            window.scrollTo(0, 0)
 
             if (typeof callback === 'function')
-                callback(text_html);
+                callback(text_html)
 
             if (typeof navigated === 'function')
-                navigated();
+                navigated()
 
-            //console.timeEnd(name);
+            //console.timeEnd(name)
 
-            return true;
+            return true
 
         } else {
 
@@ -260,32 +260,6 @@ var µ = (function (w) {
 //hashCode
 String.prototype.hashCode=function(){var b=0,d,a,c;if(this.length==0){return b}for(d=0,c=this.length;d<c;d++){a=this.charCodeAt(d);b=((b<<5)-b)+a;b|=0}return b};
 
-//Cache AJAX - github.com/paulirish/jquery-ajax-localstorage-cache
+//Cache AJAX - http://github.com/paulirish/jquery-ajax-localstorage-cache
 if (typeof jQuery !== "undefined")
 $.ajaxPrefilter(function(b,h,d){function c(){var i="modernizr";try{localStorage.setItem(i,i);localStorage.removeItem(i);return true}catch(j){return false}}if(!c()||!b.localCache){return}var g=b.cacheTTL||5;var f=b.cacheKey||b.url.replace(/jQuery.*/,"")+b.type+(b.data||"");if(b.isCacheValid&&!b.isCacheValid()){localStorage.removeItem(f)}var a=localStorage.getItem(f+"cachettl");if(a&&a<+new Date()){localStorage.removeItem(f);localStorage.removeItem(f+"cachettl");a="expired"}var e=localStorage.getItem(f);if(e){if(b.dataType.toLowerCase().indexOf("json")===0){e=JSON.parse(e)}b.success(e);d.abort()}else{if(b.success){b.realsuccess=b.success}b.success=function(j){var i=j;if(this.dataType.toLowerCase().indexOf("json")===0){i=JSON.stringify(j)}try{localStorage.setItem(f,i)}catch(k){localStorage.removeItem(f);localStorage.removeItem(f+"cachettl");if(b.cacheError){b.cacheError(k,f,i)}}if(b.realsuccess){b.realsuccess(j)}};if(!a||a==="expired"){localStorage.setItem(f+"cachettl",+new Date()+1000*60*60*g)}}});
-
-
-/*
- *  container, a referencia do body
- *  navigated, assim que atualiza body, executar
- *  cache , ativa o cache em AJAX TRUE [jQuery (>1.5.1) && localStorage]
-
- µ().conf(document.getElementById('container-tpl'), navigated, true);
-    
- µ('index', function(p){ console.log(p); alert('lol'); });
- 
- µ({
- 'teste':function(){ alert('teste'); }
- });
- 
- µ('teste\/([a-z]{3})/([a-z]{3})/([a-z]{3})', function(data){ console.log(data); alert('lol'); });
- 
- µ('teste\/([a-z]{3})', function(data){ console.log(data); alert('lol'); });
-
- µ().run(function(isrun){
-    if(isrun === false){
-        alert('Não foi possivel abrir o aplicativo.');
-    };
- });
-
- */
